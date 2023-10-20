@@ -3,6 +3,7 @@
 #include <string.h>
 #include "util.h"
 
+// Function that processes user input and returns 1 if valid and 0 if invalid
 int nextInstruction(char *Word, double *Key, double *NewKey) 
 {
     int returnV;

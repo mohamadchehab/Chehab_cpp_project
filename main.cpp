@@ -1,19 +1,27 @@
 
+// Library and header files imports
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "heap.h"
 #include "util.h"
 
+// Main function
 int main(int argc, char **argv) {
+	// Declaration of pointer variables fp and MinHeap
     FILE *fp; 
     HEAP *MinHeap;
+
+	// Declaration of variables
     int returnV;
     double key;
     double nextKey;
     int flag;
+
+	// Declaration of arrays
     char Word[100];
 
+	// Checking whether there are too many arguments
     if(argc < 4) {
 	fprintf(stderr, "Usage: %s <ifile> <ofile> flag\n", argv[0]);
 	exit(0);
@@ -32,7 +40,8 @@ int main(int argc, char **argv) {
 	    return 0;
 	}
 
-        if(strcmp(Word, "Init")==0) {
+	// Runs code for initializing the minheap
+    if(strcmp(Word, "Init")==0) {
 	    fprintf(stdout, "Instruction: Init %d\n", (int) key);
 	    MinHeap = (HEAP *) calloc(1, sizeof(HEAP));
 	    if(!MinHeap) {
@@ -47,6 +56,8 @@ int main(int argc, char **argv) {
 	    }	
             MinHeap->size =0;
 	}
+
+	// Displays all the minheap elements
 	if(strcmp(Word,"Print") == 0) {
 	    fprintf(stdout, "Instruction: Print\n");
 	    if(!MinHeap) {
@@ -58,6 +69,8 @@ int main(int argc, char **argv) {
 		fprintf(stdout, "%lf\n", MinHeap->H[i]->key);
 	    }
 	}
+
+	// Write minheap elements to file
 	if(strcmp(Word, "Write") == 0) {
 	    fprintf(stdout, "Instruction: Write\n");
 	    if(!MinHeap) {
@@ -75,6 +88,8 @@ int main(int argc, char **argv) {
 	    }
 	    fclose(fp);	
 	}
+
+	// Reads in minheap elements from input file
 	if(strcmp(Word, "Read") == 0) {
 	    fprintf(stdout, "Instruction: Read\n");
 	    if(!MinHeap) {
@@ -113,6 +128,7 @@ int main(int argc, char **argv) {
 		}
 	    }   
 	}	
+	// Inserts new element into minheap using Insertion function
 	if(strcmp(Word, "Insert") == 0) {
 	    fprintf(stdout, "Instruction: Insert %lf\n", key);
             if(!MinHeap) {
@@ -133,6 +149,7 @@ int main(int argc, char **argv) {
 	    }
 		
 	}
+	// Extracts the minimum element from the minheap 
 	if(strcmp(Word, "ExtractMin") == 0) {
 	    fprintf(stdout, "Instruction: ExtractMin\n");
 	    if(!MinHeap) {
@@ -153,6 +170,8 @@ int main(int argc, char **argv) {
 		fprintf(stdout, "Number of Heapify calls triggered by ExtractMin: %d\n", count);
 	    }
 	}
+
+	// Code that decreases key at index using DecreaseKey function
 	if(strcmp(Word, "DecreaseKey") == 0) {
 	    int pos = (int) key;
 	    fprintf(stdout, "Instruction: DecreaseKey %d %lf\n", pos, nextKey);
@@ -168,10 +187,9 @@ int main(int argc, char **argv) {
 	    if (nextKey > MinHeap->H[pos-1]->key || pos < 0 || pos > MinHeap->size){
         	fprintf(stderr, "Error: invalid call to DecreaseKey\n");
      		continue;
-   	    }	
-	    //ffprintf(stdout,"Current element at index %d: %lf\n", pos-1, MinHeap->H[pos-1]->key);	      
+   	    }	   
 	    DecreaseKey(MinHeap, pos, nextKey);
-	    //fprintf(stdout,"Current element at index %d: %lf\n", pos-1, MinHeap->H[pos-1]->key);
+	
 	}	
     }
 } 
