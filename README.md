@@ -1,5 +1,5 @@
 # Chehab_cpp_project
-Project: MinHeap \n
+Project: MinHeap <br />
 Programming Language: C++
 Class: CSE 310 - Data Structures and Algorithms by Dr. Xue
 Description: This project helps with demonstrating how the MinHeap data structure works using C++. 
